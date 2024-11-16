@@ -16,8 +16,7 @@ class User(models.Model):
 
 class Prestatire(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    presentation = models.TextField()
-    photo = models.ImageField(upload_to='photos/')
+    Service = models.TextField()
     is_approved = models.BooleanField(default=False)
 
     def __str__(self):
@@ -34,9 +33,9 @@ class Client(models.Model):
 
 
 class Service(models.Model):
-    designation = models.CharField(max_length=100)
     description = models.TextField()
+    photo = models.ImageField(upload_to='photos/')
     prestataire = models.ForeignKey(Prestatire, on_delete=models.CASCADE, related_name='services')
 
     def __str__(self):
-        return self.designation
+        return self.description

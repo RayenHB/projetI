@@ -1,0 +1,36 @@
+/* Container de la page d'enregistrement */
+.register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fef9f3; /* Fond doux */
+  }
+  
+  /* Card du formulaire d'enregistrement */
+  .shadow-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Titre du formulaire */
+  .register-title {
+    color: #d89f91; /* Rose doux */
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+  }
+  
+  /* Bouton d'enregistrement personnalisé */
+  .register-button {
+    background-color: #f7c1b3; /* Rose pêche */
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-button:hover {
+    background-color: #d89f91; /* Effet hover */
+  }
+  

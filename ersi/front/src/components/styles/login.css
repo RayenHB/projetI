@@ -1,0 +1,62 @@
+/* Container de la page de login */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fef9f3; /* Fond doux pour la page */
+  }
+  
+  /* Styles pour le titre du formulaire */
+  .login-title {
+    color: #d89f91; /* Rose doux */
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+  }
+  
+  /* Card du formulaire */
+  .shadow-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input personnalisé */
+  .login-input {
+    border-radius: 8px;
+    border: 1px solid #d89f91; /* Bordure rose clair */
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Animation de focus pour les inputs */
+  .login-input:focus {
+    border-color: #f7c1b3; /* Bordure rose foncé */
+    box-shadow: 0 0 5px rgba(248, 174, 167, 0.6);
+  }
+  
+  /* Bouton de soumission personnalisé */
+  .login-button {
+    background-color: #f7c1b3; /* Rose pêche */
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    
+  }
+  
+  .login-button:hover {
+    background-color: #d89f91; /* Effet hover - rose foncé */
+  }
+  
+  /* Espacement entre les champs de formulaire */
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+  
+  /* Effet de transition pour le bouton */
+  .login-button:active {
+    background-color: #d89f91;
+  }
+  

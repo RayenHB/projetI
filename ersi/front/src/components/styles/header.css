@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #0481f526; 
+  height: 64px;
+}
+
+.logo img {
+  height: 60px; 
+  width: auto;
+}
+
+.authButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.authButton, .logoutButton {
+  color: #fff;
+  font-weight: 600;
+}
+
+.authButton.ant-btn, .logoutButton.ant-btn {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  color: #fff;
+}
+
+.authButton.ant-btn:hover,
+.logoutButton.ant-btn:hover {
+  background-color: #40a9ff; /* Couleur survolée */
+  border-color: #40a9ff;
+  color: #fff;
+}
