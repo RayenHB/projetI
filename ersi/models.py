@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.models import AbstractUser,Group, Permission
 
-class User(models.Model):
+
+class User(AbstractUser):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
     role = models.CharField(max_length=50)
     tel = models.CharField(max_length=15)
     adresse = models.TextField()
-    
 
+    
+    
     def __str__(self):
         return self.nom
 

@@ -9,10 +9,9 @@
   
   .left-bar {
     width: 250px;
-    padding: 20px;
     background-color: #ffffff;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
+    margin-top: 20px;
     border-radius: 8px;
   }
   
@@ -28,6 +27,7 @@
     flex: 1;
     max-width: 900px;
     width: 100%;
+    
   }
   
   .update-button {

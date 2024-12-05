@@ -1,6 +1,9 @@
 .profile-client-container {
     display: flex;
-    justify-content: center; /* Centre le contenu horizontalement */
+    justify-content: center; 
+    margin: 10px;
+    
+    
   }
   
   .left-bar {

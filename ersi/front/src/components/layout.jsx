@@ -2,9 +2,7 @@
 
 import React, { Fragment } from "react";
 import Header from "./header";
-import Footer from "./footer";
 import Routers from "./routers";
-import { Container } from "@mui/material";
 
 const Layout = () => {
   return (
@@ -13,7 +11,6 @@ const Layout = () => {
       <div>
         <Routers />
       </div>
-      <Footer />
     </Fragment>
   );
 };

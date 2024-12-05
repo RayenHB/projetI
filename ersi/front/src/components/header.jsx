@@ -1,22 +1,20 @@
-// src/components/Header.js
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
-import logo from "../assets/logo.png"; 
-import "./styles/header.css"; 
+import logo from "../assets/logo.png";
+import "./styles/header.css";
+import { Container } from "reactstrap";
 
 const Header = () => {
   const navigate = useNavigate();
-  const isAuthenticated = false; 
+  const isAuthenticated = false;
 
   const handleLogout = () => {
-    
     navigate("/login");
   };
 
   return (
-    <header className="header">
+    <Container className="header">
       <div className="logo">
         <Link to="/">
           <img src={logo} alt="Logo" />
@@ -32,13 +30,16 @@ const Header = () => {
             <Button onClick={() => navigate("/login")} className="authButton">
               Se connecter
             </Button>
-            <Button onClick={() => navigate("/register")} className="authButton">
+            <Button
+              onClick={() => navigate("/register")}
+              className="authButton"
+            >
               Nous rejoindre
             </Button>
           </>
         )}
       </div>
-    </header>
+    </Container>
   );
 };
 

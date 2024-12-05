@@ -1,36 +1,59 @@
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background-color: #0481f526; 
-  height: 64px;
+  background-color: #ffffff; 
+  padding: 20px 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .logo img {
-  height: 60px; 
+  height: 50px; 
   width: auto;
 }
 
 .authButtons {
   display: flex;
-  gap: 20px;
+  gap: 20px; 
 }
 
 .authButton, .logoutButton {
-  color: #fff;
-  font-weight: 600;
+  background-color: #FF878D; 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
-.authButton.ant-btn, .logoutButton.ant-btn {
-  background-color: #1890ff;
-  border-color: #1890ff;
-  color: #fff;
+.authButton:hover, .logoutButton:hover {
+  background-color: #FF878D; 
+  transform: translateY(-2px);
+  color:#FF878D; 
 }
 
-.authButton.ant-btn:hover,
-.logoutButton.ant-btn:hover {
-  background-color: #40a9ff; /* Couleur survolée */
-  border-color: #40a9ff;
-  color: #fff;
+.authButton:focus, .logoutButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 179, 138, 0.4); 
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .authButtons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .logo img {
+    height: 40px; 
+  }
 }

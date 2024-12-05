@@ -7,9 +7,21 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import User, Prestatire, Client, Service
 from .serializers import UserSerializer, PrestatireSerializer, ClientSerializer
-from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.contrib.auth.backends import ModelBackend
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+
+
+
+
 
 def index():
     HttpResponse('hey')
@@ -108,26 +120,76 @@ def inscription(request):
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 @api_view(['POST'])
-def login(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-
-    # Authenticate user based on email and password
-    user = authenticate(request, username=email, password=password)
-    if user is None:
-        return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
-    
-    # If user has role "prestataire", ensure they are approved
-    if user.role.lower() == 'prestataire':
+@csrf_exempt
+def login_view(request):
+    if request.method == "POST":
         try:
-            prestataire = Prestatire.objects.get(user=user)
-            if not prestataire.is_approved:
-                return Response({"error": "Account pending approval by admin"}, status=status.HTTP_403_FORBIDDEN)
-        except Prestatire.DoesNotExist:
-            return Response({"error": "Prestataire profile not found"}, status=status.HTTP_404_NOT_FOUND)
+            data = json.loads(request.body)
+            email = data.get("email")
+            password = data.get("password")
+            print(f"Email: {email}")
+            print(f"Password: {password}")
 
-    # Generate or retrieve token for the user
-    token, created = Token.objects.get_or_create(user=user)
+            # Authenticate the user
+            user = User.objects.filter(email=email).first()
+            print(user)
+            if user and check_password(password, user.password):
+                print("User authenticated successfully:", user)
+                login(request, user)
+                return JsonResponse({
+                    "message": "Login successful",
+                    "user": {
+                        "id": user.id,
+                        "email": user.email,
+                        "username": user.nom,
+                    }
+                }, status=200)
+            else:
+                print("Invalid credentials")
+                return JsonResponse({"message": "Invalid email or password"}, status=401)
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid data format"}, status=400)
+    else:
+        return JsonResponse({"message": "Only POST requests are allowed"}, status=405)
 
-    return Response({"token": token.key, "user_id": user.id, "role": user.role}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def client(request):
+    try:
+        
+        print(request.user)
+        data = {
+            "nom": client.user.nom,
+            "prenom": client.user.prenom,
+            "email": client.user.email,
+            "tel": client.user.tel,
+           
+        }
+        print(data)
+        return Response(data)
+    except Client.DoesNotExist:
+        return Response({"error": "Client not found"}, status=404)
+    
+
+@api_view(['GET'])
+def prestataire(request, id):
+    try:
+        # Fetch the Prestataire with the given ID
+        prestataire = Prestatire.objects.get(id=id)
+
+        # Extract data from the related user fields
+        data = {
+            "nom": prestataire.user.nom,
+            "prenom": prestataire.user.prenom,
+            "email": prestataire.user.email,
+            "tel": prestataire.user.tel,
+            # Add other fields specific to Prestataire if needed
+        }
+        print(data)
+
+        # Return the data in the response
+        return Response(data)
+    except Prestatire.DoesNotExist:
+        return Response({"error": "Prestataire not found"}, status=404)
